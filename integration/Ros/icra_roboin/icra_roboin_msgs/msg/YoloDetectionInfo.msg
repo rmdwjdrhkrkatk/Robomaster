@@ -1,0 +1,13 @@
+time stamp
+int16 number_of_detection
+int8[3] reserved
+int8[3] enemy_detected
+int16[3] angle_hori
+int16[3] angle_verti
+int16[3] Pixel_X
+int16[3] Pixel_Y
+int16[3] Pixel_width
+int16[3] Pixel_height
+int16[3] real_width
+int16[3] real_height
+int16[3] distance

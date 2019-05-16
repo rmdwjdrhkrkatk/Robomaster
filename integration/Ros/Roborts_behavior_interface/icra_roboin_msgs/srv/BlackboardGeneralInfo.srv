@@ -1,0 +1,17 @@
+time stamp
+string request_sender
+---
+time stamp
+geometry_msgs/PoseStamped my_pose
+uint8 enemy_count
+geometry_msgs/PoseStamped enemy_pose1
+geometry_msgs/PoseStamped enemy_pose2
+geometry_msgs/PoseStamped goal_pose
+bool is_enemy_detected
+bool is_enemy_1_detected
+bool is_enemy_2_detected
+bool has_defense_bonus
+int32 defense_time_left
+uint8 current_behavior_style
+uint8 current_behavior_state
+

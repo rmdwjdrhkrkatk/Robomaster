@@ -1,0 +1,24 @@
+<launch>
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/>
+
+  <!-- Run the Gazebo Simulator -->
+  <include file="$(find roborts_gazebo)/launch/model_robomaster_world.launch"/>
+  
+  <rosparam file="$(find roborts_gimbal)/config/joint_controller.yaml" command="load" />
+
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <param name="use_gui" value="False" />
+  </node>
+
+  <!-- load the controllers -->
+  <!-- You need to install gazebo-ros-control package to run this node-->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/roborts"
+	args="joint_state_controller
+	      yaw_position_controller
+	      pitch_position_controller" />   
+
+  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_gimbal)/rviz/gimbal_control.rviz"/>-->
+
+</launch>

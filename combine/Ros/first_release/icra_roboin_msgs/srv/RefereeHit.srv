@@ -1,0 +1,7 @@
+std_msgs/Header header
+int16 damage
+int16 your_hp
+#0,1,2,3 : front left rear right
+uint8 which_armor
+---
+bool success

@@ -1,0 +1,36 @@
+<launch>
+  <arg name="cmd_vel_topic" default="nav_cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+  <arg name="map_topic" default="map" />
+  <arg name="namespace" default="" />
+  <!--arg name="global_planner_algorithm" default="global_planner/GlobalPlanner" /-->
+  <!--arg name="local_planner_algorithm" default="teb_local_planner/TebLocalPlannerROS" /-->
+  <arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+  <!--arg name="local_planner_algorithm" default="eband_local_planner/EBandPlannerROS"/-->
+  <!--arg name="local_planner_algorithm" default="base_local_planner/TrajectoryPlannerROS"/-->
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find icra_roboin_navigation)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find icra_roboin_navigation)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find icra_roboin_navigation)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find icra_roboin_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find icra_roboin_navigation)/param/base_local_planner_params.yaml" command="load" />
+    <!--rosparam file="$(find icra_roboin_navigation)/param/base_global_planner_params.yaml" command="load" /-->
+
+    <!--param name="base_global_planner" value="$(arg global_planner_algorithm)" /-->
+    <param name="base_local_planner" value="$(arg local_planner_algorithm)" />
+    <param name="global_costmap/global_frame" value="$(arg namespace)map" />
+    <param name="global_costmap/robot_base_frame" value="$(arg namespace)base_link" />
+    <param name="global_costmap/laser_scan_sensor/sensor_frame" value="$(arg namespace)base_laser_link" />
+    <param name="local_costmap/global_frame" value="$(arg namespace)odom" />
+    <param name="local_costmap/robot_base_frame" value="$(arg namespace)base_link" />
+    <param name="local_costmap/laser_scan_sensor/sensor_frame" value="$(arg namespace)base_laser_link" />
+    <param name="DWAPlannerROS/odom_topic" value="$(arg namespace)odom" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <remap from="map" to="$(arg map_topic)" />
+
+  </node>
+
+
+</launch>

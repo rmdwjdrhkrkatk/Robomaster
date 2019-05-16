@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robomaster_ai">
+    <xacro:macro name="bullet" params="bullet_number">
+        <joint name="bullet_joint_${bullet_number}" type="floating">
+            <parent link="pitch_Link"/>
+            <child link="bullet_${bullet_number}" />
+            
+        </joint>
+
+        <link name="bullet_${bullet_number}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <sphere radius="0.02"/>
+                </geometry>
+                <material name="Cyan">
+                    <color rgba="0 1.0 1.0 1.0"/>
+                </material>
+            </visual>
+   
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <sphere radius="0.02"/>
+                </geometry>
+            </collision>
+
+        </link>
+    </xacro:macro>
+ 
+
+    <xacro:bullet bullet_number="0" />
+    <xacro:bullet bullet_number="1" />
+    <xacro:bullet bullet_number="2" />
+    <xacro:bullet bullet_number="3" />
+    <xacro:bullet bullet_number="4" />
+</robot>

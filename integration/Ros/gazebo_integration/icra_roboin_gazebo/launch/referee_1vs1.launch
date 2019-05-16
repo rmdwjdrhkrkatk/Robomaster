@@ -1,0 +1,175 @@
+<launch>
+  <arg name="map" value="icra2019"/>
+  <master auto="restart"/>
+
+  <!-- start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+      <arg name="world_name" value="$(find icra_roboin_gazebo)/world/robomaster.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+  </include>
+
+
+
+
+
+
+
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_navigation)/maps/$(arg map).yaml" respawn="false">
+  	<param name="frame_id" value="referee_map"/>
+  	<remap from="map" to="referee_map" />
+  </node>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf1" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map roborts_Red_0/map" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf2" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map roborts_Blue_1/map" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<group ns="roborts_Red_0">
+  <param name="tf_prefix" value="roborts_Red_0"/>
+
+  <!-- map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_navigation)/maps/$(arg map).yaml" respawn="false">
+  	<param name="frame_id" value="roborts_Red_0/map"/>
+  </node>
+
+
+  <include file="$(find icra_roboin_gazebo)/launch/single.launch" >
+  	<arg name="x_pos" value="-3.6" />
+  	<arg name="y_pos" value="-2" />
+  	<arg name="Y_pos" value="0" />
+  	<arg name="color"  value="Red" />
+  	<arg name="robot_number" value="0" />
+  </include>
+
+
+
+  <!-- amcl -->
+  <include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+  	<arg name="odom_frame_id"     default="roborts_Red_0/odom"/>
+  	<arg name="base_frame_id"     default="roborts_Red_0/base_link"/>
+  	<arg name="global_frame_id"     default="roborts_Red_0/map"/>
+
+  	<arg name="scan_topic_name"     default="scan"/>
+  	<arg name="map_topic_name"     default="map"/>
+
+  	<arg name="initial_pose_x" default="0.5"/>
+  	<arg name="initial_pose_y" default="0.6"/>
+  	<arg name="initial_pose_a" default="0"/>
+
+  </include>
+
+
+  <include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+  	<arg name="cmd_vel_topic" default="omni_cmd_vel" />
+  	<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+  </include>
+
+
+  <!-- behavior interface node -->
+  <node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+  	<param name="team" value="red_team"/>
+  	<param name="rule" value="1vs1"/>
+  </node>
+
+
+</group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<group ns="roborts_Blue_1">
+  <param name="tf_prefix" value="roborts_Blue_1"/>
+
+  <!-- map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_navigation)/maps/$(arg map).yaml" respawn="false">
+  	<param name="frame_id" value="roborts_Blue_1/map"/>
+  </node>
+
+
+  <include file="$(find icra_roboin_gazebo)/launch/single.launch" >
+  	<arg name="x_pos" value="3.6" />
+  	<arg name="y_pos" value="2" />
+  	<arg name="Y_pos" value="3.14" />
+  	<arg name="color"  value="Blue" />
+  	<arg name="robot_number" value="1" />
+  </include>
+
+
+
+  <!-- amcl -->
+  <include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+  	<arg name="odom_frame_id"     default="roborts_Blue_1/odom"/>
+  	<arg name="base_frame_id"     default="roborts_Blue_1/base_link"/>
+  	<arg name="global_frame_id"     default="roborts_Blue_1/map"/>
+
+  	<arg name="scan_topic_name"     default="scan"/>
+  	<arg name="map_topic_name"     default="map"/>
+
+  	<arg name="initial_pose_x" default="7.5"/>
+  	<arg name="initial_pose_y" default="4.4"/>
+  	<arg name="initial_pose_a" default="3.14"/>
+
+  </include>
+
+
+  <include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+  	<arg name="cmd_vel_topic" default="omni_cmd_vel" />
+  	<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+  </include>
+
+
+  <!-- behavior interface node -->
+  <node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+  	<param name="team" value="blue_team"/>
+  	<param name="rule" value="1vs1"/>
+  </node>
+
+
+</group>
+
+</launch>

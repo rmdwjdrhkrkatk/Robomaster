@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>icra_roboin_behavior</name>
+  <version>0.0.0</version>
+  <description>The icra_roboin_behavior package</description>
+
+
+  <maintainer email="hw@todo.todo">hw</maintainer>
+
+
+  <license>TODO</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roborts_msgs</build_depend>
+  <build_depend>icra_roboin_msgs</build_depend>
+  <depend>move_base</depend>
+  <depend>move_base_msgs</depend>
+
+
+  
+  <export> </export>
+</package>

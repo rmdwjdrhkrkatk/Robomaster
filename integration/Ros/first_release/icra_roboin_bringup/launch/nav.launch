@@ -1,0 +1,43 @@
+<launch>
+  <arg name="map" value="icra2019"/>
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/>
+
+  <!--Load parameters for localization node  -->
+  <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
+  <rosparam command="load" file="$(find roborts_localization)/amcl/config/amcl.yaml" />
+
+  <!--static_transform_publisher x y z yaw pitch roll frame_id child_frame_id-->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_base_laser_link_broadcaster"
+          args="0.15 0.0 0.05 1.57 0.0 0.0 base_link base_laser_link" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_camera_link_broadcaster"
+          args="0.0  0.0 0.0  0.0  0.0 0.0 base_link camera" />
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_bringup)/maps/$(arg map).yaml" respawn="false" />
+
+  <!-- Run the stage simulator -->
+  <node pkg="stage_ros" type="stageros" name="stageros" args="$(find icra_roboin_bringup)/worlds/$(arg map).world" respawn="false" >
+    <remap from="base_scan" to="scan" />
+    <param name="base_watchdog_timeout" value="1" />
+  </node>
+
+  <!-- Run the localization node -->
+  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find icra_roboin_bringup)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find icra_roboin_bringup)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find icra_roboin_bringup)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find icra_roboin_bringup)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find icra_roboin_bringup)/param/move_base_params.yaml" command="load" />
+    <rosparam file="$(find icra_roboin_bringup)/param/dwa_local_planner_params.yaml" command="load" />
+  </node>
+
+  <!-- Run the rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find icra_roboin_bringup)/rviz/dev3.rviz" />
+
+
+</launch>

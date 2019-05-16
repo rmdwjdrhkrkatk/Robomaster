@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--map file to use-->
+	<arg name="map_file" default="$(find roboin_navigation)/maps/map.yaml"/>
+
+
+
+	<!--spawn world and robot-->
+	<include file="$(find roboin_simulation)/launch/simple_spawn.launch"/>
+
+
+
+	<!--teleop control-->
+	<include file="$(find roboin_control)/launch/keyboard_teleop.launch"/>
+
+	<!--start move_base-->
+	<include file="$(find roboin_navigation)/launch/roboin_navigation.launch">
+  	  <arg name="map_file" value="$(arg map_file)"/>
+	</include>
+
+  	<!--rviz w/ config-->
+	<node name="rviz" pkg="rviz" type="rviz"
+          args="-d $(find roboin_navigation)/rviz/move_base.rviz" />
+
+</launch>
+

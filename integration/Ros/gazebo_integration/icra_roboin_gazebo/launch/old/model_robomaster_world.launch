@@ -1,0 +1,34 @@
+<launch>
+  <arg name="model" default="roborts.original"/>
+  <arg name="world" default="robomaster"/>
+  <arg name="color" default="Red" />
+  <arg name="robort_number" default="0" />
+  <arg name="x_pos" default="-3.5"/>
+  <arg name="y_pos" default="-2"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="R_pos" default="0.0"/>
+  <arg name="P_pos" default="0.0"/>
+  <arg name="Y_pos" default="0.0"/>
+
+  <!--<node name="kill_gzserver" pkg="roborts_gazebo" type="kill_gzserver.sh"/>-->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find roborts_gazebo)/world/$(arg world).world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!--<param name="robot_description" command="$(find xacro)/xacro -inorder '$(find roborts_gazebo)/urdf/$(arg model).xacro'" />-->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find roborts_gazebo)/urdf/$(arg model).xacro' color:=Red number:=0" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" 
+  args="-urdf -model roborts -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg R_pos) -P $(arg P_pos) -Y $(arg Y_pos) -param robot_description" />
+
+</launch>

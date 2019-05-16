@@ -1,0 +1,19 @@
+<launch>
+  <!-- start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+      <arg name="world_name" value="$(find roborts_gazebo)/world/robomaster.world"/>
+      <arg name="paused" value="false"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="gui" value="true"/>
+      <arg name="headless" value="false"/>
+      <arg name="debug" value="false"/>
+  </include>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find roborts_bringup)/maps/icra2019.yaml" respawn="false" />
+
+  <!-- include multiple robots -->
+  <include file="$(find roborts_navigation)/launch/multi.launch"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_navigation)/rviz/multi_spawn.rviz" />
+
+</launch>

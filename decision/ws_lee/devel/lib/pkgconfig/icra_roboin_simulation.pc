@@ -1,0 +1,8 @@
+prefix=/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel
+
+Name: icra_roboin_simulation
+Description: Description of icra_roboin_simulation
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel/lib 
+Requires: 

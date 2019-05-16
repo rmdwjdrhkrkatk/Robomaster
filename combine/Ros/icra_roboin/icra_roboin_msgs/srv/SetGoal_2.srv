@@ -1,0 +1,4 @@
+icra_roboin_msgs/GoalDescription goal
+---
+bool success
+int64 info

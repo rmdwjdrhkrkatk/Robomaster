@@ -1,0 +1,4 @@
+uint8 behavior
+---
+bool success
+int16 info

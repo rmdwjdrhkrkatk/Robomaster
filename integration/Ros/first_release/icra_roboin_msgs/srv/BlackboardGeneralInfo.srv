@@ -1,0 +1,29 @@
+time stamp
+string request_sender
+bool confirm
+---
+time stamp
+time game_start_time
+duration time_passed_from_start
+#0,1,2,3 : dead, ready, play, end
+uint8 game_state
+duration buff_zone_cooltime
+duration reload_zone_cooltime
+int16 my_health
+bool is_hit
+uint8 which_armor_hit
+time last_hit_time
+bool has_buff
+duration buff_left
+int16 ammo
+geometry_msgs/PoseStamped my_pose
+geometry_msgs/PoseStamped enemy_pose1
+geometry_msgs/PoseStamped enemy_pose2
+uint8 how_many_enemies_detected
+bool is_enemy_1_detected
+bool is_enemy_2_detected
+uint8 locked_on_enemy
+uint8 enemy_priority
+icra_roboin_msgs/GoalDescription goal
+uint8 current_behavior_style
+uint8 current_behavior_process

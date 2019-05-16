@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="roborts">
+
+  <xacro:include filename="$(find icra_roboin_gazebo)/urdf/roborts.gazebo.xacro"/>
+  <xacro:include filename="$(find icra_roboin_gazebo)/urdf/roborts.base.xacro"/>
+
+  <xacro:property name="color" value="$(arg color)" />
+  <xacro:property name="number" value="$(arg number)" />
+
+  <xacro:gimbal namespace="roborts_${color}_${number}" />
+  <xacro:led_color led_color="${color}" />
+  <xacro:gazebo_plugin namespace="" />
+</robot>

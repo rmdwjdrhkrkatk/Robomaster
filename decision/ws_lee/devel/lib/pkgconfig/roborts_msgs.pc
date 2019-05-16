@@ -1,0 +1,8 @@
+prefix=/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel
+
+Name: roborts_msgs
+Description: Description of roborts_msgs
+Version: 1.0.0
+Cflags: -I/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel/include
+Libs: -L/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel/lib 
+Requires: 

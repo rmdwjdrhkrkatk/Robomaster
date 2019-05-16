@@ -1,0 +1,4 @@
+GlobalPlanner:
+  use_grid_path: True 
+  use_quadratic: False 
+  use_dijkstra: False

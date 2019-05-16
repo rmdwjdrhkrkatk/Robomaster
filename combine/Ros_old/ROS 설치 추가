@@ -1,0 +1,17 @@
+ros 설치 pdf 추가
+
+13 페이지,
+
+아래 라이브러리 두 개도 추가로 설치해야함.
+
+sudo apt install ros-melodic-teleop-twist-keyboard
+sudo apt install xterm
+
+14 페이지, catkin_make 시 include 폴더가 없다는 오류가 뜰 경우, 해당 디렉토리 가서 include 폴더를 추가해주면됨. 폴더만 만들면 됨.
+
+~/catkin_ws/src/roboin_simulation/include
+~/catkin_ws/src/roboin_description/include
+~/catkin_ws/src/roboin_navigation/include
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>icra_roboin_navigation</name>
+  <version>0.0.0</version>
+  <description>The icra_roboin_navigation package</description>
+
+  <maintainer email="hw@todo.todo">hw</maintainer>
+
+  <license>TODO</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+
+  <export></export>
+</package>

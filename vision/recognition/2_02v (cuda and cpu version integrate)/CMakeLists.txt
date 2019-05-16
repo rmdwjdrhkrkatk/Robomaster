@@ -1,0 +1,1 @@
+## darknet , realesnes, opencv include and bin folder must be loaded

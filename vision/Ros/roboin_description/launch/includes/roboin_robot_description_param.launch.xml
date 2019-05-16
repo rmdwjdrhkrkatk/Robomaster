@@ -1,0 +1,5 @@
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find roboin_description)/urdf/roboin.xacro" />
+
+</launch>

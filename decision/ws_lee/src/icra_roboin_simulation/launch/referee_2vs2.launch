@@ -1,0 +1,248 @@
+<launch>
+	<arg name="map" value="icra2019"/>
+	<arg name="world" value="2vs2"/>
+	<master auto="restart"/>
+	<param name="/use_sim_time" value="true"/>
+  
+
+
+
+
+	<!-- Stage Simulation -->
+	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find icra_roboin_simulation)/worlds/$(arg world).world" respawn="false" >
+		<remap from="base_scan" to="scan" />
+		<remap from="robot_0/base_scan" to="robot_0/scan"/>
+		<remap from="robot_1/base_scan" to="robot_1/scan"/>
+		<remap from="robot_2/base_scan" to="robot_2/scan"/>
+		<remap from="robot_3/base_scan" to="robot_3/scan"/>
+	</node>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="referee_map"/>
+		<remap from="map" to="referee_map" />
+	</node>
+	
+
+    	<node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf1" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map robot_0/map" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf2" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map robot_1/map" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf3" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map robot_2/map" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf4" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map robot_3/map" />
+
+
+<group ns="robot_0">
+	<param name="tf_prefix" value="robot_0"/>
+
+	<!-- map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="robot_0/map"/>
+	</node>
+
+	<!-- amcl -->
+	<include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+		<arg name="odom_frame_id"     default="robot_0/odom"/>
+		<arg name="base_frame_id"     default="robot_0/base_link"/>
+		<arg name="global_frame_id"     default="robot_0/map"/>
+
+		<arg name="scan_topic_name"     default="scan"/>
+		<arg name="map_topic_name"     default="map"/>
+
+		<arg name="initial_pose_x" default="1"/>
+		<arg name="initial_pose_y" default="1"/>
+		<arg name="initial_pose_a" default="0"/>
+
+	</include>
+
+
+	<include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+		<arg name="cmd_vel_topic" default="cmd_vel" />
+		<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+	</include>
+
+
+	<!-- detection simulator node -->
+	<node pkg="icra_roboin_simulation" type="stage_blob_detector.py" name="yolo_simulator" respawn="false">
+		<param name="my_color" value="blue"/>
+		<param name="ally_color" value="blue"/>
+		<param name="enemy1_color" value="red"/>
+		<param name="enemy2_color" value="red"/>
+	</node>
+
+	<!-- behavior interface node -->
+	<node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="true" output="screen">
+		<param name="team" value="blue_team"/>
+		<param name="rule" value="2vs2"/>
+	</node>
+
+
+	<node pkg="icra_roboin_simulation" type="simulation_shooter.py" name="simulation_shooter" respawn="false" output="screen"/>
+</group>
+
+<group ns="robot_1">
+	<param name="tf_prefix" value="robot_1"/>
+
+	<!-- map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="robot_1/map"/>
+	</node>
+
+	<!-- amcl -->
+	<include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+		<arg name="odom_frame_id"     default="robot_1/odom"/>
+		<arg name="base_frame_id"     default="robot_1/base_link"/>
+		<arg name="global_frame_id"     default="robot_1/map"/>
+
+		<arg name="scan_topic_name"     default="scan"/>
+		<arg name="map_topic_name"     default="map"/>
+
+		<arg name="initial_pose_x" default="7"/>
+		<arg name="initial_pose_y" default="1"/>
+		<arg name="initial_pose_a" default="3.14"/>
+
+	</include>
+
+
+	<include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+		<arg name="cmd_vel_topic" default="cmd_vel" />
+		<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+	</include>
+
+
+	<!-- detection simulator node -->
+	<node pkg="icra_roboin_simulation" type="stage_blob_detector.py" name="yolo_simulator" respawn="false">
+		<param name="my_color" value="blue"/>
+		<param name="ally_color" value="blue"/>
+		<param name="enemy1_color" value="red"/>
+		<param name="enemy2_color" value="red"/>
+	</node>
+
+	<!-- behavior interface node -->
+	<node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+		<param name="team" value="blue_team"/>
+		<param name="rule" value="2vs2"/>
+	</node>
+
+
+	<node pkg="icra_roboin_simulation" type="simulation_shooter.py" name="simulation_shooter" respawn="false" output="screen"/>
+</group>
+
+<group ns="robot_2">
+	<param name="tf_prefix" value="robot_2"/>
+
+	<!-- map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="robot_1/map"/>
+	</node>
+
+	<!-- amcl -->
+	<include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+		<arg name="odom_frame_id"     default="robot_2/odom"/>
+		<arg name="base_frame_id"     default="robot_2/base_link"/>
+		<arg name="global_frame_id"     default="robot_2/map"/>
+
+		<arg name="scan_topic_name"     default="scan"/>
+		<arg name="map_topic_name"     default="map"/>
+
+		<arg name="initial_pose_x" default="7"/>
+		<arg name="initial_pose_y" default="4"/>
+		<arg name="initial_pose_a" default="3.14"/>
+
+	</include>
+
+
+	<include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+		<arg name="cmd_vel_topic" default="cmd_vel" />
+		<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+	</include>
+
+
+	<!-- detection simulator node -->
+	<node pkg="icra_roboin_simulation" type="stage_blob_detector.py" name="yolo_simulator" respawn="false">
+		<param name="my_color" value="red"/>
+		<param name="ally_color" value="red"/>
+		<param name="enemy1_color" value="blue"/>
+		<param name="enemy2_color" value="blue"/>
+	</node>
+
+	<!-- behavior interface node -->
+	<node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+		<param name="team" value="red_team"/>
+		<param name="rule" value="2vs2"/>
+	</node>
+
+
+	<node pkg="icra_roboin_simulation" type="simulation_shooter.py" name="simulation_shooter" respawn="false" output="screen"/>
+</group>
+
+<group ns="robot_3">
+	<param name="tf_prefix" value="robot_3"/>
+
+	<!-- map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="robot_3/map"/>
+	</node>
+
+	<!-- amcl -->
+	<include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+		<arg name="odom_frame_id"     default="robot_3/odom"/>
+		<arg name="base_frame_id"     default="robot_3/base_link"/>
+		<arg name="global_frame_id"     default="robot_3/map"/>
+
+		<arg name="scan_topic_name"     default="scan"/>
+		<arg name="map_topic_name"     default="map"/>
+
+		<arg name="initial_pose_x" default="1"/>
+		<arg name="initial_pose_y" default="4"/>
+		<arg name="initial_pose_a" default="0"/>
+
+	</include>
+
+
+	<include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+		<arg name="cmd_vel_topic" default="cmd_vel" />
+		<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+	</include>
+
+
+	<!-- detection simulator node -->
+	<node pkg="icra_roboin_simulation" type="stage_blob_detector.py" name="yolo_simulator" respawn="false">
+		<param name="my_color" value="red"/>
+		<param name="ally_color" value="red"/>
+		<param name="enemy1_color" value="blue"/>
+		<param name="enemy2_color" value="blue"/>
+	</node>
+
+	<!-- behavior interface node -->
+	<node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+		<param name="team" value="red_team"/>
+		<param name="rule" value="2vs2"/>
+	</node>
+
+
+	<node pkg="icra_roboin_simulation" type="simulation_shooter.py" name="simulation_shooter" respawn="false" output="screen"/>
+</group> 
+
+
+
+
+
+
+
+
+	<node pkg="icra_roboin_simulation" type="referee_1vs1.py" name="referee" respawn="true" output="screen" />
+	<!-- rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find icra_roboin_simulation)/rviz/refereetest.rviz" />
+
+
+
+</launch>

@@ -1,0 +1,133 @@
+TebLocalPlannerROS:
+
+# odom_topic: odom
+# map_frame: /map
+
+ # Trajectory
+
+ teb_autosize: True
+ dt_ref: 0.3
+ dt_hysteresis: 0.1
+ global_plan_overwrite_orientation: True
+ # global_plan_viapoint_sep: 0.2
+ allow_init_with_backwards_motion: True
+ max_global_plan_lookahead_dist: 1.0
+ feasibility_check_no_poses: 2
+ # via_points_ordered: True
+ exact_arc_length: True 
+ wheelbase: 0.0
+ # Robot
+
+ max_vel_x: 0.8
+ max_vel_y: 0.8
+ max_vel_x_backwards: 0.2
+ max_vel_theta: 0.3
+ acc_lim_x: 1.0
+ acc_lim_y: 1.0
+ acc_lim_theta: 4.0
+ min_turning_radius: 0.0
+ footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+   type: "line"
+   radius: 0.2 # for type "circular"
+   line_start: [-0.15, 0.0] # for type "line"
+   line_end: [0.2, 0.0] # for type "line"
+   front_offset: 0.2 # for type "two_circles"
+   front_radius: 0.2 # for type "two_circles"
+   rear_offset: 0.2 # for type "two_circles"
+   rear_radius: 0.2 # for type "two_circles"
+   vertices: [ [0.25, -0.05], [0.18, -0.05], [0.18, -0.18], [-0.19, -0.18], [-0.25, 0], [-0.19, 0.18], [0.18, 0.18], [0.18, 0.05], [0.25, 0.05] ] # for type "polygon"
+
+ # GoalTolerance
+
+ xy_goal_tolerance: 0.1
+ yaw_goal_tolerance: 0.1
+ free_goal_vel: false
+
+ # Obstacles
+
+ min_obstacle_dist: 0.4
+ include_costmap_obstacles: True
+ legacy_obstacle_association: True # The current version of teb_local_planner (0.6.6) seems to sometimes rotate very slowly without legacy_obstacle_association
+ costmap_obstacles_behind_robot_dist: 1.0
+ obstacle_poses_affected: 30
+ costmap_converter_plugin: ""
+ costmap_converter_spin_thread: True
+ costmap_converter_rate: 5
+
+ include_dynamic_obstacles: True
+ dynamic_obstacle_inflation_dist: 0.5
+
+ # Optimization
+
+ no_inner_iterations: 5
+ no_outer_iterations: 4
+ optimization_activate: True
+ optimization_verbose: False
+ penalty_epsilon: 0.0
+ weight_max_vel_x: 1
+ weight_max_vel_theta: 1
+ weight_acc_lim_x: 1
+ weight_acc_lim_theta: 1
+ weight_kinematics_nh: 1
+ weight_kinematics_forward_drive: 1
+ weight_kinematics_turning_radius: 1
+ weight_optimaltime: 1
+ weight_obstacle: 0.1 # 50
+ weight_dynamic_obstacle: 10 # not in use yet
+ selection_cost_hysteresis: 1.0
+ selection_obst_cost_scale: 1.0
+ selection_alternative_time_cost: False # not in use yet
+
+ # Homotopy Class Planner
+
+ enable_homotopy_class_planning: False
+ enable_multithreading: True
+ simple_exploration: False
+ max_number_classes: 4
+ roadmap_graph_no_samples: 15
+ roadmap_graph_area_width: 5
+ h_signature_prescaler: 0.5
+ h_signature_threshold: 0.1
+ obstacle_keypoint_offset: 0.1
+ obstacle_heading_threshold: 0.45
+ visualize_hc_graph: False
+
+
+ EBandPlannerROS:
+   xy_goal_tolerance: 0.03
+   yaw_goal_tolerance: 0.05
+
+   max_vel_lin: 0.3
+   max_vel_th: 0.6
+
+   max_acceleration: 0.2
+   max_translational_acceleration: 0.2
+   max_rotational_acceleration: 0.4
+
+   differential_drive: false
+
+   # rot_stopped_vel: 0.01
+   # trans_stopped_vel: 0.01
+   # marker_lifetime: 0.5
+   # eband_min_relative_overlap: 0.7
+   # eband_tiny_bubble_distance: 0.01
+   # eband_tiny_bubble_expansion: 0.01
+   # eband_internal_force_gain: 1.0
+   # eband_external_force_gain: 2.0
+   # num_iterations_eband_optimization: 3
+   # eband_equilibrium_approx_max_recursion_depth: 4
+   # eband_equilibrium_relative_overshoot: 0.75
+   # eband_significant_force_lower_bound: 0.15
+   # costmap_weight: 10.0
+   # min_vel_lin: 0.1
+   # min_vel_th: 0.0
+   # min_in_place_vel_th: 0.2
+   # in_place_trans_vel: 0.0
+   # k_prop: 4.0
+   # k_damp: 3.5
+   # Ctrl_Rate: 10.0
+   # virtual_mass: 0.75
+   # rotation_correction_threshold: 0.5
+   # bubble_velocity_multiplier: 2.0
+   # rotation_threshold_multiplier: 1.0
+   # disallow_hysteresis: false

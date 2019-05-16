@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find roboin_description)/launch/includes/roboin_robot_description_param.launch.xml"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+</launch>

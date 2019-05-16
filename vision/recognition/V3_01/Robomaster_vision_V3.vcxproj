@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6F65B078-556E-416F-B9B7-0D62D00D1882}</ProjectGuid>
+    <RootNamespace>RobomastervisionV3</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Prpgramming\git\FMS_LIanSoft_YonseiUniv\librealsense-2.18.1\realsense2;C:\Prpgramming\git\FMS_LIanSoft_YonseiUniv\librealsense-2.18.1\src;C:\Prpgramming\git\FMS_LIanSoft_YonseiUniv\librealsense-2.18.1\include;C:\Prpgramming\Program_library\opencv-3.4.5\build;C:\Prpgramming\Program_library\opencv-3.4.5\include;C:\Prpgramming\Program_library\opencv-3.4.5\include\opencv;C:\Prpgramming\Program_library\opencv-3.4.5\modules\core\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\flann\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\imgproc\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\ml\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\phase_unwrapping\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\photo\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\plot\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\reg\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\surface_matching\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\video\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\xphoto\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\dnn\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\fuzzy\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\hfs\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\imgcodecs\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\shape\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\videoio\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\highgui\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\superres\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\bioinspired\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\dnn_objdetect\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\features2d\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\line_descriptor\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\saliency\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\text\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\calib3d\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\ccalib\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\datasets\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\objdetect\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\rgbd\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\stereo\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\structured_light\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\tracking\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\videostab\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\xfeatures2d\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\ximgproc\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\xobjdetect\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\aruco\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\bgsegm\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\dpm\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\face\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\optflow\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\stitching\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\world\include;C:\Prpgramming\Program_library\opencv_contrib-3.4.5\modules\img_hash\include;C:\Prpgramming\Program_library\opencv-3.4.5\modules\ts\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Vison_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\all.hpp" />
+    <ClInclude Include="src\camera.hpp" />
+    <ClInclude Include="src\Data_control.hpp" />
+    <ClInclude Include="src\object_detection.hpp" />
+    <ClInclude Include="src\pch.hpp" />
+    <ClInclude Include="src\Vision_ros.hpp" />
+    <ClInclude Include="src\yolo_class.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

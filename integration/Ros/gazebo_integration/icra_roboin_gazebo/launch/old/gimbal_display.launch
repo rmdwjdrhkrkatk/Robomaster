@@ -1,0 +1,15 @@
+<launch>
+  <arg name="gui" default="true" />
+
+  <arg name="model" default="robomaster_ai"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find roborts_gazebo)/urdf/$(arg model).xacro" />
+
+  <param name="use_gui" value="$(arg gui)" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+  <node name="rviz" pkg="rviz" type="rviz" />
+</launch>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="x_pos" default="-2.35989"/>
+  <arg name="y_pos" default="-2.01781"/>
+  <arg name="z_pos" default="0.0"/>
+
+	<node name="kill_gzserver" pkg="roboin_simulation" type="kill_gzserver.sh"/>
+
+	<!--node name="gazebo" pkg="gazebo_ros" type="gazebo" respawn="false" output="screen"
+	args="-e ode $(find roboin_description)/worlds/robomaster.world" /-->
+
+  	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+   	 <arg name="world_name" value="$(find roboin_description)/worlds/robomaster.world"/>
+   	 <arg name="paused" value="false"/>
+   	 <arg name="use_sim_time" value="true"/>
+   	 <arg name="gui" value="true"/>
+   	 <arg name="headless" value="false"/>
+   	 <arg name="debug" value="false"/>
+  	</include>
+
+  	<param name="robot_description" command="$(find xacro)/xacro $(find roboin_description)/urdf/roboin.xacro" />
+
+  	<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model roboin -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+respawn="false"/>
+
+	<node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" 
+	output="screen" launch-prefix="xterm -e"/>
+
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find roboin_simulation)/rviz/laserscan_odom.rviz" />
+
+	
+
+</launch>
+

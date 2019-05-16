@@ -1,0 +1,5 @@
+std_msgs/Header header
+#0,1,2,3 : dead, ready, play, end
+uint8 game_state
+---
+bool success

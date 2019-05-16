@@ -1,0 +1,78 @@
+<launch>
+  <arg name="map" value="icra2019"/>
+  <master auto="restart"/>
+
+  <!-- map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_navigation)/maps/$(arg map).yaml" respawn="false">
+        <param name="frame_id" value="referee_map"/>
+	<remap from="map" to="referee_map" />
+  </node>
+
+  <include file="$(find icra_roboin_bringup)/launch/base.launch">
+  </include>
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="map_static_tf1" args="0.0  0.0 0.0  0.0  0.0 0.0 referee_map robot_0/map" />
+
+
+
+<group ns="robot_0">
+
+  <!-- map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_navigation)/maps/$(arg map).yaml" respawn="false">
+        <param name="frame_id" value="robot_0"/>
+  </node>
+
+  <!-- rplidar -->
+  <node name="rplidar_node" pkg="rplidar_ros" type="rplidarNode" respawn="true" output="screen">
+      <param name="serial_port" type="string" value="/dev/rplidar"/>
+      <param name="serial_baudrate" type="int" value="115200"/>
+      <param name="frame_id" type="string" value="base_laser_link"/>
+      <param name="inverted" type="bool" value="false"/>
+      <param name="angle_compensate" type="bool" value="true"/>
+  </node>
+   <include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+
+  </include>
+
+  <!--static_transform_publisher x y z yaw pitch roll frame_id child_frame_id-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_base_laser_link_broadcaster"
+          args="0.17 0.0 0.05 3.1415 0.0 0 robot_0/base_link base_laser_link" />
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_camera_link_broadcaster"
+          args="0.0  0.0 0.0  0.0  0.0 0.0 robot_0/base_link camera" />
+
+  <!-- behavior interface node -->
+  <node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+  	<param name="team" value="red_team"/>
+  	<param name="rule" value="1vs1"/>
+  </node>
+
+
+  <!-- amcl -->
+  <include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+        <arg name="odom_frame_id"     default="robot_0/odom"/>
+        <arg name="base_frame_id"     default="robot_0/base_link"/>
+        <arg name="global_frame_id"     default="robot_0/map"/>
+
+        <arg name="scan_topic_name"     default="scan"/>
+        <arg name="map_topic_name"     default="map"/>
+
+  	<arg name="initial_pose_x" default="1"/>
+  	<arg name="initial_pose_y" default="1"/>
+  	<arg name="initial_pose_a" default="0"/>
+
+  </include>
+</group>
+
+
+
+  <!--<node pkg="icra_roboin_vision" type="roboin_vision_node" name="vision_node" respawn="false" /> -->
+
+  <!-- rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find icra_roboin_bringup)/rviz/yonsei1.rviz" />
+
+
+</launch>

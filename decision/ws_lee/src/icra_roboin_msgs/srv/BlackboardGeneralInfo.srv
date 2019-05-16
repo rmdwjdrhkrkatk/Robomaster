@@ -1,0 +1,36 @@
+time stamp
+string request_sender
+bool confirm
+---
+time stamp
+int8 my_id
+int8 my_life
+int8 my_teamtype
+int8 robot_damage_type
+int8 robot_damage_armor
+int8 my_bonus_zone
+int8 my_hp
+int8 ally_life
+int8 enemy1_life
+int8 enemy2_life
+int8 enemy_bonus_zone
+int32 time_passed_from_start
+int32 last_buff_time
+int32 last_supply_time
+int32 enemy_last_buff_time
+int8 ammo
+int8 game_status
+int8 robot_bonus
+int8 supplier_status
+int8 game_result
+geometry_msgs/PoseStamped my_pose
+geometry_msgs/PoseStamped enemy_pose1
+geometry_msgs/PoseStamped enemy_pose2
+uint8 how_many_enemies_detected
+bool is_enemy_1_detected
+bool is_enemy_2_detected
+
+
+
+
+

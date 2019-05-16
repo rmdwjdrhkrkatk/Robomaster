@@ -1,0 +1,8 @@
+prefix=/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel
+
+Name: icra_roboin_msgs
+Description: Description of icra_roboin_msgs
+Version: 0.0.0
+Cflags: -I/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel/include
+Libs: -L/home/lee/Projects/Robomaster/RobomasterAIChallenge-decision/ws_lee/devel/lib 
+Requires: actionlib_msgs message_runtime

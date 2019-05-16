@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+
+<!--spawn coordinate-->
+  <arg name="x_pos" default="-2.35989"/>
+  <arg name="y_pos" default="-2.01781"/>
+  <arg name="z_pos" default="0.0"/>
+
+
+	<!--kill old gzserver before start-->
+	<node name="kill_gzserver" pkg="roboin_simulation" type="kill_gzserver.sh"/>
+
+	<!--spawn world-->
+
+  	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+   	 <arg name="world_name" value="$(find roboin_description)/worlds/robomaster.world"/>
+   	 <arg name="paused" value="false"/>
+   	 <arg name="use_sim_time" value="true"/>
+   	 <arg name="gui" value="true"/>
+   	 <arg name="headless" value="false"/>
+   	 <arg name="debug" value="false"/>
+  	</include>
+
+	<!--tf publisher-->
+  	<include file="$(find roboin_description)/launch/roboin_robot_state_publisher.launch"/>
+
+	<!--spawn robot-->
+  	<node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model roboin
+          -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+	<!--teleop control-->
+	<include file="$(find roboin_control)/launch/keyboard_teleop.launch"/>
+
+	<!--rviz-->
+	<node name="rviz" pkg="rviz" type="rviz" 
+          args="-d $(find roboin_simulation)/rviz/laserscan_odom.rviz" />
+
+	
+
+</launch>
+

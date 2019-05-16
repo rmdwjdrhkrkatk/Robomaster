@@ -1,0 +1,73 @@
+<launch>  
+
+  <!-- BEGIN ROBOT 0. index starts from zero to coinside with the array index in the code-->
+  <group ns="roborts_Red_0">
+    <param name="tf_prefix" value="roborts_Red_0" />
+
+    <include file="$(find roborts_navigation)/launch/single.launch" >
+      <arg name="x_pos" value="-3.6" />
+      <arg name="y_pos" value="-2" />
+      <arg name="Y_pos" value="0" />
+      <arg name="color"  value="Red" />
+      <arg name="robot_number" value="0" />
+    </include>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find roborts_bringup)/maps/icra2019.yaml" respawn="false" />
+
+  	
+	  <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
+  	<rosparam command="load" file="$(find roborts_localization)/amcl/config/amcl.yaml" />
+	  <param name="odom_frame" value="roborts_Red_0/odom"/>
+	  <param name="base_frame" value="roborts_Red_0/base_link"/>
+    <param name="global_frame" value="roborts_Red_0/map"/>
+
+    <param name="laser_topic_name" value="scan"/>
+    <param name="init_pose_topic_name" value="initialpose"/>
+
+    <param name="initial_pose_x" value="0.5" />
+    <param name="initial_pose_y" value="0.6" />
+    <param name="initial_pose_a" value="0.0" />
+
+	  
+	  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" />
+
+    <include file="$(find roborts_navigation)/launch/move_base.launch" />
+
+  </group>
+
+
+  <group ns="roborts_Blue_1">
+    <param name="tf_prefix" value="roborts_Blue_1" />
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find roborts_bringup)/maps/icra2019.yaml" respawn="false" />
+
+    <include file="$(find roborts_navigation)/launch/single.launch" >
+      <arg name="x_pos" value="3.6" />
+      <arg name="y_pos" value="2" />
+      <arg name="Y_pos" value="3.14" />
+      <arg name="color"  value="Blue" />
+      <arg name="robot_number" value="1" />
+    </include>
+
+    
+	  <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
+  	<rosparam command="load" file="$(find roborts_localization)/amcl/config/amcl.yaml" />
+	  <param name="odom_frame" value="roborts_Blue_1/odom"/>
+	  <param name="base_frame" value="roborts_Blue_1/base_link"/>
+    <param name="global_frame" value="roborts_Blue_1/map"/>
+
+    <param name="laser_topic_name" value="scan"/>
+    <param name="init_pose_topic_name" value="initialpose"/>
+
+    <param name="initial_pose_x" value="7.5" />
+    <param name="initial_pose_y" value="4.4" />
+    <param name="initial_pose_a" value="3.14" />
+
+	  
+	  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" />
+
+    <include file="$(find roborts_navigation)/launch/move_base.launch" />
+
+  </group>
+
+</launch>

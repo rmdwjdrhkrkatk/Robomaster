@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--spawn world and robot-->
+	<include file="$(find roboin_simulation)/launch/simple_spawn.launch"/>
+
+
+
+	<!--teleop control-->
+	<include file="$(find roboin_control)/launch/keyboard_teleop.launch"/>
+
+	<!--start gmapping-->
+	<include file="$(find roboin_slam)/launch/roboin_mapping.launch"/>
+
+
+</launch>
+

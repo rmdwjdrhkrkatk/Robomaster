@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node name="kill_gzserver" pkg="roboin_simulation" type="kill_gzserver.sh"/>
+
+	<node name="gazebo" pkg="gazebo_ros" type="gazebo" respawn="false" output="screen"
+	args="-e ode $(find roboin_description)/worlds/robomaster.world" />
+
+	<node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" 
+	output="screen" launch-prefix="xterm -e" >
+		<remap from="cmd_vel" to="roboin/cmd_vel" />
+	</node>
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find roboin_simulation)/rviz/laserscan_odom.rviz" />
+
+
+</launch>
+

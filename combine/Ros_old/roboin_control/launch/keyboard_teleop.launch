@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!--teleop control-->
+	<node name="keyboard_teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" 
+	output="screen" launch-prefix="xterm -e"/>
+
+
+</launch>
+

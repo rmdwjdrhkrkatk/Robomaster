@@ -1,0 +1,21 @@
+#Send a flag to server to control the thread start, pause, restart and stop
+#command == 1 start
+#command == 2 pause
+#command == 3 stop
+uint8 command
+---
+float32 result
+---
+#feedback
+time stamp
+uint8 infochecker
+uint8 enemy
+int16[3] angle_hori
+int16[3] angle_verti
+int16[3] Pixel_X
+int16[3] Pixel_Y
+int16[3] Pixel_width
+int16[3] Pixel_height
+int16[3] real_width
+int16[3] real_height
+int16[3] distance

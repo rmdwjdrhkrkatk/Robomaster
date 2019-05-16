@@ -1,0 +1,6 @@
+float64 x
+float64 y
+---
+# 0,1,2,3,4,5 : ally, enem1, enem2, miss, out_of_ammo, too_fast
+int16 judgement
+bool success

@@ -1,0 +1,8 @@
+prefix=/home/nvidia/Desktop/tae_han_test_final/devel
+
+Name: ddynamic_reconfigure
+Description: Description of ddynamic_reconfigure
+Version: 0.0.6
+Cflags: -I/home/nvidia/Desktop/tae_han_test_final/devel/include -I/home/nvidia/Desktop/tae_han_test_final/src/realsense/ddynamic_reconfigure/include
+Libs: -L/home/nvidia/Desktop/tae_han_test_final/devel/lib -lddynamic_reconfigure
+Requires: dynamic_reconfigure message_runtime std_msgs

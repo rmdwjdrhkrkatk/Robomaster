@@ -1,0 +1,964 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0.1 0 0.1" rpy="0 0 0"/>
+  </joint>
+    
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.025782 -8.2911E-05 0.025311"
+        rpy="0 0 0" />
+
+      <mass value="7.625" />
+
+      <inertia
+        ixx="0.10311"
+        ixy="-9.0391E-05"
+        ixz="0.0071078"
+        iyy="0.24575"
+        iyz="2.1083E-05"
+        izz="0.32438" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="-0.536 -0.097 -0.02"
+        rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="package://icra_roboin_gazebo/meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision name="base_link_bump_sensor_collision">
+      <origin
+        xyz="-0.1 0 0.05"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.25 0.3 0.16" />
+      </geometry>
+    </collision>
+
+  </link>
+
+  <link name="fl_wheel_Link">
+
+    <inertial>
+      <origin
+        xyz="-5.232E-06 0.014616 -9.0427E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.86078" />
+      <inertia
+        ixx="0.0015361"
+        ixy="1.6456E-06"
+        ixz="-2.0131E-06"
+        iyy="0.002844"
+        iyz="-9.5351E-07"
+        izz="0.0015337" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh filename="package://icra_roboin_gazebo/meshes/Front_Left_Wheel.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0.01 0"
+        rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.075" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="base_link_to_fl_wheel_joint"
+    type="fixed">
+    <origin
+      xyz="0.21194 -0.1709 0.0022"
+      rpy="4.8881E-16 -3.6891E-17 -3.1416" />
+    <parent link="base_link" />
+    <child link="fl_wheel_Link" />
+  </joint>
+
+  <link name="fr_wheel_Link">
+
+    <inertial>
+      <origin
+        xyz="0.00010086 -0.014551 4.8285E-05"
+        rpy="0 0 0" />
+
+      <mass value="0.86078" />
+
+      <inertia
+        ixx="0.0015355"
+        ixy="4.8831E-07"
+        ixz="1.8067E-06"
+        iyy="0.002844"
+        iyz="9.4618E-08"
+        izz="0.0015338" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://icra_roboin_gazebo/meshes/Front_Right_Wheel.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 -0.01 0"
+        rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.075" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link_to_fr_wheel_joint" type="fixed">
+    <origin
+      xyz="0.21206 0.1609 0.0022"
+      rpy="6.9321E-17 -3.6891E-17 -3.1416" />
+    <parent link="base_link" />
+    <child link="fr_wheel_Link" />
+  </joint>
+  
+  <link name="br_wheel_Link">
+    <inertial>
+      <origin
+        xyz="-5.2323E-06 -0.014549 -9.0423E-06"
+        rpy="0 0 0" />
+
+      <mass value="0.86078" />
+
+      <inertia
+        ixx="0.0015361"
+        ixy="1.6481E-06"
+        ixz="-2.0131E-06"
+        iyy="0.002844"
+        iyz="-9.4912E-07"
+        izz="0.0015338" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://icra_roboin_gazebo/meshes/Rear_Right_Wheel.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 -0.01 0"
+        rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.075" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link_to_br_wheel_joint" type="fixed">
+    <origin
+      xyz="-0.21194 0.1603 0.0022"
+      rpy="5.7896E-17 1.5832E-16 3.1416" />
+    <parent link="base_link" />
+    <child link="br_wheel_Link" />
+  </joint>
+
+  <link name="bl_wheel_Link">
+    <inertial>
+      <origin
+        xyz="0.00010086 0.014592 4.8286E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.86078" />
+      <inertia
+        ixx="0.0015355"
+        ixy="5.3543E-07"
+        ixz="1.8067E-06"
+        iyy="0.002844"
+        iyz="1.1717E-07"
+        izz="0.0015337" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/Rear_Left_Wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0.01 0"
+        rpy="1.5708 0 0" />
+      <geometry>
+        <cylinder radius="0.075" length="0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_link_to_bl_wheel_joint"
+    type="fixed">
+    <origin
+      xyz="-0.21206 -0.1703 0.0022"
+      rpy="4.8881E-16 -3.6891E-17 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="bl_wheel_Link" />
+  </joint>
+
+  <link
+    name="Projector_Bottom">
+    <inertial>
+      <origin
+        xyz="4.8668E-06 0.00071637 -0.016694"
+        rpy="0 0 0" />
+      <mass
+        value="0.19516" />
+      <inertia
+        ixx="7.1489E-05"
+        ixy="-1.1693E-08"
+        ixz="-1.128E-08"
+        iyy="7.2978E-05"
+        iyz="-6.8136E-07"
+        izz="0.00011961" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5708 0 1.5708" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/Projector_Bottom.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+  </link>
+
+  <joint
+    name="Projector_Bottom_Joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.132"
+      rpy="0 1.5708 3.14" />
+    <parent
+      link="base_link" />
+    <child
+      link="Projector_Bottom" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+
+  <link
+    name="yaw_Link">
+    <inertial>
+      <origin
+        xyz="7.9767E-06 0.024936 0.059798"
+        rpy="0 0 0" />
+      <mass
+        value="0.98307" />
+      <inertia
+        ixx="0.0072228"
+        ixy="1.8624E-07"
+        ixz="5.1373E-07"
+        iyy="0.0035103"
+        iyz="-0.0016193"
+        izz="0.00443" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/Projector_Middle.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89412 0.91373 0.92941 1" />
+      </material>
+    </visual>
+
+  </link>
+
+<xacro:macro name="gimbal" params="namespace" >
+
+  <joint
+    name="${namespace}/base_link_to_yaw_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="-1.57 0 -1.57" />
+    <parent
+      link="Projector_Bottom" />
+    <child
+      link="yaw_Link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="1000"
+      velocity="100" />
+  </joint>
+
+  <link
+    name="${namespace}/pitch_Link">
+    <inertial>
+      <origin
+        xyz="-0.0024244 0.00051587 -0.011372"
+        rpy="0 0 0" />
+      <mass
+        value="0.68228" />
+      <inertia
+        ixx="0.0019856"
+        ixy="5.1373E-05"
+        ixz="0.00087772"
+        iyy="0.0042744"
+        iyz="-2.4468E-05"
+        izz="0.0037072" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.05"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/Projector_Top.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+
+  </link>
+
+  <joint
+    name="${namespace}/base_link_to_pitch_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.148"
+      rpy="0 0 0" />
+    <parent
+      link="yaw_Link" />
+    <child
+      link="${namespace}/pitch_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.4"
+      upper="0.4"
+      effort="1000"
+      velocity="100" />
+  </joint>
+
+  <joint name="fake_joint" type="continuous">
+    <parent link="${namespace}/pitch_Link"/>
+    <child link="${namespace}/fake_link"/>
+    <origin xyz="0 0.2 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="${namespace}/fake_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0004"  ixy="0"  ixz="0" iyy="0.0004" iyz="0" izz="0.0004" />
+    </inertial>
+ 
+    <!--<visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>-->
+  </link>
+
+  <transmission name="${namespace}/base_link_to_yaw_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${namespace}/base_link_to_yaw_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${namespace}/base_link_to_yaw_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+
+  <transmission name="${namespace}/base_link_to_pitch_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="${namespace}/base_link_to_pitch_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="${namespace}/base_link_to_pitch_joint_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </actuator>
+  </transmission>
+
+
+
+  <link
+    name="camera_Link">
+    <inertial>
+      <origin
+        xyz="0.0060861 1.0269E-17 7.6833E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.01627" />
+      <inertia
+        ixx="3.55E-06"
+        ixy="2.3732E-22"
+        ixz="1.3726E-09"
+        iyy="2.0801E-06"
+        iyz="6.7678E-23"
+        izz="2.0554E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/realsense.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint
+    name="pitch_link_to_camera_wheel_joint"
+    type="fixed">
+    <origin
+      xyz="0 0.1 0.03"
+      rpy="0 3.14 -1.57" />
+    <parent
+      link="${namespace}/pitch_Link" />
+    <child
+      link="camera_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</xacro:macro>
+
+  <link
+    name="base_laser_link">
+    <inertial>
+      <origin
+        xyz="-0.00019454 1.2441E-18 0.027108"
+        rpy="0 0 0" />
+      <mass
+        value="0.12185" />
+      <inertia
+        ixx="6.3159E-05"
+        ixy="-9.0976E-22"
+        ixz="-4.4573E-07"
+        iyy="6.3776E-05"
+        iyz="-1.8492E-21"
+        izz="4.2072E-05" />
+    </inertial>
+    <visual>
+      <origin
+      xyz="0 -0.08 -0.03"
+      rpy="1.57 0 3.14" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/test_a2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+
+  </link>
+
+
+  <joint
+    name="base_link_to_laser_joint"
+    type="fixed">
+    <origin
+      xyz="0.16 0 0.12"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_laser_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+    <link
+    name="right_led_Link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/right_led_part.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+    
+  </link>
+
+
+  <joint
+    name="base_link_to_right_led_joint"
+    type="fixed">
+    <origin
+      xyz="-0.07 -0.205 0.08"
+      rpy="-3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_led_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="left_led_Link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/left_led_part.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+
+  <joint
+    name="base_link_to_left_led_joint"
+    type="fixed">
+    <origin
+      xyz="-0.07 0 0.08"
+      rpy="-3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_led_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="hp_led_Link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/hp_led_part.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+    
+  </link>
+
+
+  <joint
+    name="base_link_to_hp_led_joint"
+    type="fixed">
+    <origin
+      xyz="-0.23 -0.14 0.18"
+      rpy="-3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="hp_led_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="front_led_Link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/front_led_part.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+
+  <joint
+    name="base_link_to_front_led_joint"
+    type="fixed">
+    <origin
+      xyz="0.175 -0.075 0.082"
+      rpy="-3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_led_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="back_led_Link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/back_led_part.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+
+  <joint
+    name="base_link_to_back_led_joint"
+    type="fixed">
+    <origin
+      xyz="-0.275 -0.075 0.082"
+      rpy="-3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_led_Link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="front_armor_link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <collision name="front_armor_collision">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/back_armor.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_link_to_front_armor_joint"
+    type="fixed">
+    <origin
+      xyz="0.28 0.04 0.0"
+      rpy="0 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_armor_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="left_armor_link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <collision name="left_armor_collision">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/left_armor.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_link_to_left_armor_joint"
+    type="fixed">
+    <origin
+      xyz="-0.05 0.16 0.1"
+      rpy="3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_armor_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="right_armor_link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <collision name="right_armor_collision">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/right_armor.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_link_to_right_armor_joint"
+    type="fixed">
+    <origin
+      xyz="0.045 -0.145 0.09"
+      rpy="3.14 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_armor_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link
+    name="back_armor_link">
+
+    <inertial>
+      <origin
+        xyz="-0.27282 -0.063339 0.010089"
+        rpy="0 0 0" />
+      <mass
+        value="0.028183" />
+      <inertia
+        ixx="0.00037048"
+        ixy="7.803E-06"
+        ixz="9.4378E-05"
+        iyy="0.0011379"
+        iyz="-1.4266E-06"
+        izz="0.0014674" />
+    </inertial>
+
+    <collision name="back_armor_collision">
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://icra_roboin_gazebo/meshes/back_armor.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="base_link_to_back_armor_joint"
+    type="fixed">
+    <origin
+      xyz="-0.245 -0.055 -0.005"
+      rpy="0 0 1.57" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_armor_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+</robot>

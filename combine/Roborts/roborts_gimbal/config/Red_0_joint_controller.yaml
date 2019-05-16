@@ -1,0 +1,16 @@
+
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50  
+
+# Velocity Controllers ---------------------------------------
+yaw_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: roborts_Red_0/base_link_to_yaw_joint
+  pid: {p: 20.0, i: 0.1, d: 1.0}
+
+pitch_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: roborts_Red_0/base_link_to_pitch_joint
+  pid: {p: 20.0, i: 0.1, d: 1.0}

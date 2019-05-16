@@ -1,0 +1,7 @@
+std_msgs/Header header
+#0 : defense buff
+#1 : enemy defense buff
+uint8 buff_type
+float64 damage_multiplier
+---
+bool success

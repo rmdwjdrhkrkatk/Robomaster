@@ -1,0 +1,89 @@
+<launch>
+	<arg name="map" value="icra2019"/>
+	<arg name="world" value="1vs1"/>
+	<master auto="restart"/>
+	<param name="/use_sim_time" value="true"/>
+  
+
+
+
+
+	<!-- Stage Simulation -->
+	<node pkg="stage_ros" type="stageros" name="stageros" args="$(find icra_roboin_simulation)/worlds/$(arg world).world" respawn="false" >
+		<remap from="base_scan" to="scan" />
+		<remap from="robot_0/base_scan" to="robot_0/scan"/>
+		<remap from="robot_1/base_scan" to="robot_1/scan"/>
+	</node>
+
+
+
+<group ns="robot_0">
+	<param name="tf_prefix" value="robot_0"/>
+
+	<!-- map server -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find icra_roboin_simulation)/maps/$(arg map).yaml" respawn="false">
+		<param name="frame_id" value="robot_0/map"/>
+	</node>
+
+	<!-- amcl -->
+	<include file="$(find icra_roboin_navigation)/launch/amcl.launch">
+
+		<arg name="odom_frame_id"     default="robot_0/odom"/>
+		<arg name="base_frame_id"     default="robot_0/base_link"/>
+		<arg name="global_frame_id"     default="robot_0/map"/>
+
+		<arg name="scan_topic_name"     default="scan"/>
+		<arg name="map_topic_name"     default="map"/>
+
+		<arg name="initial_pose_x" default="1"/>
+		<arg name="initial_pose_y" default="1"/>
+		<arg name="initial_pose_a" default="0"/>
+
+	</include>
+
+
+	<include file="$(find icra_roboin_navigation)/launch/navigation_base.launch">
+
+		<arg name="cmd_vel_topic" default="omni_cmd_vel" />
+		<arg name="odom_topic" default="odom" />
+		<arg name="map_topic" default="map" />
+		<arg name="local_planner_algorithm" default="dwa_local_planner/DWAPlannerROS"/>
+
+	</include>
+
+
+	<!-- detection simulator node -->
+	<node pkg="icra_roboin_simulation" type="stage_blob_detector.py" name="yolo_simulator" respawn="false">
+		<param name="my_color" value="blue"/>
+		<param name="ally_color" value="none"/>
+		<param name="enemy1_color" value="red"/>
+		<param name="enemy2_color" value="none"/>
+	</node>
+
+	<!-- behavior interface node -->
+	<node pkg="icra_roboin_behavior" type="behavior_node" name="behavior_node" respawn="false" output="screen">
+		<param name="team" value="blue_team"/>
+		<param name="rule" value="1vs1"/>
+	</node>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</group>
+
+	<!-- rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find icra_roboin_simulation)/rviz/dualtest.rviz" />
+
+
+
+</launch>

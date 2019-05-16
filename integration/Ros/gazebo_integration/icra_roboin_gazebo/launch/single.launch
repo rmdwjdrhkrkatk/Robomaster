@@ -1,0 +1,43 @@
+<launch>
+  <arg name="x_pos" default="-3.5"/>
+  <arg name="y_pos" default="1.9"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="R_pos" default="0.0"/>
+  <arg name="P_pos" default="0.0"/>
+  <arg name="Y_pos" default="0.0"/>
+  <arg name="model" default="roborts"/>
+  <arg name="color" default="Red" />
+  <arg name="robot_number" default="0" />
+
+  <param name="robot_description" 
+      command="$(find xacro)/xacro --inorder '$(find icra_roboin_gazebo)/urdf/$(arg model).xacro' color:=$(arg color) number:=$(arg robot_number)" />
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg model)_$(arg color)_$(arg robot_number)" 
+        args="-x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) 
+              -R $(arg R_pos) -P $(arg P_pos) -Y $(arg Y_pos)
+              -unpause 
+              -urdf 
+              -param robot_description 
+              -model $(arg model)_$(arg color)_$(arg robot_number)" 
+        respawn="false">
+  </node>
+
+  <rosparam file="$(find icra_roboin_gazebo)/config/$(arg color)_$(arg robot_number)_joint_controller.yaml" command="load" />
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" 
+	args="joint_state_controller
+	      yaw_position_controller
+	      pitch_position_controller" /> 
+
+  <param name="robot_namespace" value="roborts_$(arg color)_$(arg robot_number)" />
+
+  <node name="angle_to_command" pkg="icra_roboin_gazebo" type="angle_to_command" />
+
+  <node name="contact_to_damage" pkg="icra_roboin_gazebo" type="contact_to_damage" />
+
+</launch>

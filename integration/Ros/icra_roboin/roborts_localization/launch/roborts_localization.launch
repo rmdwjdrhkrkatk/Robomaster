@@ -1,0 +1,17 @@
+<launch>
+
+
+
+
+  <!-- AMCL -->
+  <node pkg="roborts_localization" type="localization_node" name="localization_node" respawn="false" >
+
+
+
+
+  </node>
+
+
+
+
+</launch>
